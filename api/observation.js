@@ -1,12 +1,18 @@
 var async = require('async')
+  , ObservationEvents = require('./events/observation.js')
   , FieldFactory = require('./field')
   , ObservationModel = require('../models/observation');
 
 var fieldFactory = new FieldFactory();
 
-function Observation(event) {
+function Observation(event, user, deviceId) {
   this._event = event;
+  this._user = user;
+  this._deviceId = deviceId;
 }
+
+var EventEmitter = new ObservationEvents();
+Observation.on = EventEmitter;
 
 Observation.prototype.getAll = function(options, callback) {
   var event = this._event;
@@ -73,6 +79,9 @@ Observation.prototype.validate = function(observation) {
 
 // DEPRECATED backwards compat for creating an observation.  Will be removed in version 5.x.x
 Observation.prototype.create = function(observation, callback) {
+  if (this._user) observation.userId = this._user._id;
+  if (this._deviceId) observation.deviceId = this._deviceId;
+
   try {
     this.validate(observation);
   } catch (err) {
@@ -80,7 +89,14 @@ Observation.prototype.create = function(observation, callback) {
     return callback(err);
   }
 
-  ObservationModel.createObservation(this._event, observation, callback);
+  var self = this;
+  ObservationModel.createObservation(this._event, observation, function(err, observation) {
+    if (!err) {
+      EventEmitter.emit(ObservationEvents.events.add, observation.toObject(), self._event, self._user);
+    }
+
+    callback(err, observation);
+  });
 };
 
 Observation.prototype.createObservationId = function(callback) {
@@ -101,6 +117,9 @@ Observation.prototype.validateObservationId = function(id, callback) {
 };
 
 Observation.prototype.update = function(observationId, observation, callback) {
+  if (this._user) observation.userId = this._user._id;
+  if (this._deviceId) observation.deviceId = this._deviceId;
+
   try {
     this.validate(observation);
   } catch (err) {
@@ -108,7 +127,14 @@ Observation.prototype.update = function(observationId, observation, callback) {
     return callback(err);
   }
 
-  ObservationModel.updateObservation(this._event, observationId, observation, callback);
+  var self = this;
+  ObservationModel.updateObservation(this._event, observationId, observation, function(err, observation) {
+    if (!err) {
+      EventEmitter.emit(ObservationEvents.events.update, observation.toObject(), self._event, self._user);
+    }
+
+    callback(err, observation);
+  });
 };
 
 Observation.prototype.addFavorite = function(observationId, user, callback) {
@@ -128,7 +154,17 @@ Observation.prototype.removeImportant = function(observation, callback) {
 };
 
 Observation.prototype.addState = function(observationId, state, callback) {
-  ObservationModel.addState(this._event, observationId, state, callback);
+  var self = this;
+
+  ObservationModel.addState(this._event, observationId, state, function(err, state) {
+    if (!err) {
+      if (state.name === 'archive') {
+        EventEmitter.emit(ObservationEvents.events.remove, observationId, self._event);
+      }
+    }
+
+    callback(err, state);
+  });
 };
 
 module.exports = Observation;
