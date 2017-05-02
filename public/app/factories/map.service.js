@@ -15,8 +15,10 @@ function MapService() {
     removeLayer: removeLayer,
     destroy: destroy,
     getVectorLayers: getVectorLayers,
+    getGeoPackageLayers: getGeoPackageLayers,
     createRasterLayer: createRasterLayer,
     createVectorLayer: createVectorLayer,
+    createGeoPackageLayer: createGeoPackageLayer,
     createMarker: createMarker,
     removeMarker: removeMarker,
     updateMarker: updateMarker,
@@ -34,6 +36,7 @@ function MapService() {
   var baseLayer = null;
   var rasterLayers = {};
   var vectorLayers = {};
+  var geoPackageLayers = {};
   var listeners = [];
 
   return service;
@@ -42,7 +45,7 @@ function MapService() {
     listeners.push(listener);
 
     if (_.isFunction(listener.onLayersChanged)) {
-      var layers = _.values(rasterLayers).concat(_.values(vectorLayers));
+      var layers = _.values(rasterLayers).concat(_.values(vectorLayers).concat(_.values(geoPackageLayers)));
       listener.onLayersChanged({added: layers});
     }
 
@@ -69,12 +72,24 @@ function MapService() {
     return vectorLayers;
   }
 
+  function getGeoPackageLayers() {
+    return geoPackageLayers;
+  }
+
   function createRasterLayer(layer) {
     layersChanged({
       added: [layer]
     });
 
     rasterLayers[layer.name] = layer;
+  }
+
+  function createGeoPackageLayer(layer) {
+    layersChanged({
+      added: [layer]
+    });
+
+    geoPackageLayers[layer.name] = layer;
   }
 
   function createVectorLayer(layer) {
@@ -240,6 +255,15 @@ function MapService() {
     });
     rasterLayers = {};
 
+    _.each(_.values(geoPackageLayers), function(layerInfo) {
+      _.each(listeners, function(listener) {
+        if (_.isFunction(listener.onLayerRemoved)) {
+          listener.onLayerRemoved(layerInfo);
+        }
+      });
+    });
+    geoPackageLayers = {};
+
     listeners = [];
   }
 
@@ -264,6 +288,16 @@ function MapService() {
       });
 
       delete rasterLayers[layer.name];
+    }
+
+    var geoPackageLayer = geoPackageLayers[layer.name];
+    if (geoPackageLayer) {
+      _.each(listeners, function(listener) {
+        if (_.isFunction(listener.onLayerRemoved)) {
+          listener.onLayerRemoved(geoPackageLayer);
+        }
+      });
+      delete geoPackageLayers[layer.name];
     }
   }
 

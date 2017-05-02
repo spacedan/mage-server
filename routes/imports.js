@@ -2,12 +2,14 @@ module.exports = function(app, security) {
   var api = require('../api')
     , access = require('../access')
     , fs = require('fs-extra')
+    , path = require('path')
+    , environment = require('environment')
     , toGeoJson = require('../utilities/togeojson');
 
   var passport = security.authentication.passport;
 
   function verifyLayer(req, res, next) {
-    if (req.layer.type !== 'Feature') {
+    if (req.layer.type !== 'Feature' && req.layer.type !== 'GeoPackage') {
       return res.status(400).send("Cannot import data, layer type is not 'Static'");
     }
 
@@ -43,6 +45,33 @@ module.exports = function(app, security) {
         };
 
         res.json(response);
+      });
+    }
+  );
+
+  app.post(
+    '/api/layers/:layerId/gpkg',
+    passport.authenticate('bearer'),
+    access.authorize('CREATE_LAYER'),
+    verifyLayer,
+    readImportFile,
+    function(req, res, next) {
+      var finalDir = path.join(environment.attachmentBaseDirectory, req.layer.id);
+      var finalPath = path.join(finalDir, 'geopackage.gpkg');
+      fs.mkdirp(finalDir, function(err) {
+        fs.copy(req.files.file.path, finalPath, function() {
+          if (err) return next(err);
+
+          var response = {
+            files: [{
+              finalPath: finalPath,
+              name: req.files.file.originalname,
+              size: req.files.file.size
+            }]
+          };
+
+          res.json(response);
+        });
       });
     }
   );

@@ -23,6 +23,10 @@ var LayerSchema = new Schema({
     transparent: { type: Boolean },
     version: { type: String }
   },
+  geopackage: {
+    featureLayers: Schema.Types.Mixed,
+    tileLayers: Schema.Types.Mixed
+  },
   collectionName: { type: String, required: false }
 },{
   versionKey: false

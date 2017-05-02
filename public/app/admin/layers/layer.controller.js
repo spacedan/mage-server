@@ -11,16 +11,26 @@ function AdminLayerController($scope, $uibModal, $routeParams, $location, $filte
   $scope.eventsPage = 0;
   $scope.eventsPerPage = 10;
 
-  $scope.fileUploadOptions = {
-    acceptFileTypes: /(\.|\/)(kml)$/i,
-    url: '/api/layers/' + $routeParams.layerId + '/kml?access_token=' + LocalStorageService.getToken()
-  };
-
   $scope.uploads = [{}];
   $scope.uploadConfirmed = false;
 
   Layer.get({id: $routeParams.layerId}, function(layer) {
     $scope.layer = layer;
+
+    if ($scope.layer.type === 'GeoPackage') {
+      $scope.layer.geopackage = $scope.layer.geopackage || {};
+      $scope.fileUploadOptions = {
+        acceptFileTypes: /(\.|\/)(gpkg)$/i,
+        url: '/api/layers/' + $routeParams.layerId + '/gpkg?access_token=' + LocalStorageService.getToken(),
+        previewFunction: $scope.geopackagePreview,
+        preview: true
+      };
+    } else {
+      $scope.fileUploadOptions = {
+        acceptFileTypes: /(\.|\/)(kml)$/i,
+        url: '/api/layers/' + $routeParams.layerId + '/kml?access_token=' + LocalStorageService.getToken()
+      };
+    }
 
     Event.query(function(events) {
       $scope.event = {};
@@ -108,5 +118,31 @@ function AdminLayerController($scope, $uibModal, $routeParams, $location, $filte
   $scope.status = {};
   $scope.$on('uploadComplete', function(e, url, response, index) {
     $scope.status[index] = response.files[0];
+    if ($scope.layer.type === 'GeoPackage') {
+      $scope.layer.$save({}, function() {
+      });
+    }
   });
+
+  $scope.geopackagePreview = function(geoPackageFile) {
+    if (window.FileReader) {
+      var r = new FileReader();
+
+      r.onload = function() {
+        var array = new Uint8Array(r.result);
+        geopackage.openGeoPackageByteArray(array, function(err, gp) {
+          geopackage.getTileTables(gp, function(err, tileTables) {
+            $scope.layer.geopackage.tileLayers = tileTables;
+            geopackage.getFeatureTables(gp, function(err, featureTables) {
+              $scope.layer.geopackage.featureLayers = featureTables;
+              $scope.$apply();
+            });
+          });
+        });
+      };
+
+      r.readAsArrayBuffer(geoPackageFile);
+    }
+
+  }
 }

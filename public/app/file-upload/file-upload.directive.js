@@ -11,6 +11,7 @@ function fileUpload() {
       url: '@',
       allowUpload: '=',
       preview: '=',
+      previewFunction: '=',
       uploadId: '=',
       uploadFileFormName: '=',
       defaultImageUrl: '='
@@ -33,6 +34,7 @@ function FileUploadController($scope, $element) {
     if (!$scope.defaultImageUrl) return;
     $(this).attr('src', $scope.defaultImageUrl);
   }).load(function() {
+    console.log('load args', arguments);
     $scope.uploadImageMissing = false;
   });
 
@@ -43,7 +45,11 @@ function FileUploadController($scope, $element) {
 
     var element = $($element.find('.upload-file')[0]);
     if ($scope.preview) {
-      previewFile($scope.file, element);
+      if ($scope.previewFunction) {
+        $scope.previewFunction($scope.file, element);
+      } else {
+        previewFile($scope.file, element);
+      }
     }
     $scope.$apply(function() {
       $scope.$emit('uploadFile', $scope.uploadId);
@@ -53,7 +59,6 @@ function FileUploadController($scope, $element) {
 
   $scope.$watch('url', function(url) {
     if (!url) return;
-
     $scope.uploadImageMissing = false;
     $element.find('.preview').html(['<img class="preview-image" src="',$scope.url,'"/>'].join(''));
   });

@@ -183,6 +183,38 @@ function LeafletController($rootScope, $scope, $interval, $timeout, MapService, 
     if (layerInfo.options && layerInfo.options.selected) layerInfo.layer.addTo(map);
   }
 
+  function createGeoPackageLayer(data) {
+    for (var i = 0; i < data.geopackage.featureLayers.length; i++) {
+      var featureLayer = L.geoPackageFeatureLayer([], {
+        geoPackageUrl: data.url,
+        layerName: data.geopackage.featureLayers[i],
+        style: function (feature) {
+          return {
+            color: "#F00",
+            weight: 2,
+            opacity: 1
+          };
+        },
+        onEachFeature: function (feature, layer) {
+          var string = "";
+          for (var key in feature.properties) {
+            string += '<div class="item"><span>' + key + ': </span><span>' + feature.properties[key] + '</span></div>';
+          }
+          layer.bindPopup(string);
+        }
+      });
+
+      layerControl.addOverlay(featureLayer, data.geopackage.featureLayers[i], data.name);
+    }
+    for (var i = 0; i < data.geopackage.tileLayers.length; i++) {
+      layerControl.addOverlay(L.geoPackageTileLayer({
+            geoPackageUrl: data.url,
+            layerName: data.geopackage.tileLayers[i]
+        }), data.geopackage.tileLayers[i], data.name);
+    }
+
+  }
+
   function colorForFeature(feature, options) {
     var age = Date.now() - moment(feature.properties[options.property]).valueOf();
     var bucket = _.find(options.colorBuckets, function(bucket) { return age > bucket.min && age <= bucket.max; });
@@ -290,6 +322,9 @@ function LeafletController($rootScope, $scope, $interval, $timeout, MapService, 
         break;
       case 'geojson':
         createGeoJsonLayer(added);
+        break;
+      case 'GeoPackage':
+        createGeoPackageLayer(added);
         break;
       }
     });

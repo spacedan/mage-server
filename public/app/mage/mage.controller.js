@@ -212,6 +212,10 @@ function MageController($scope, $compile, $timeout, $animate, $document, $uibMod
         layer.url = layer.url + "?access_token=" + LocalStorageService.getToken();
       }
 
+      if (layer.type === 'GeoPackage') {
+        layer.url = '/api/layers/'+layer.id +'/geopackage?access_token=' + LocalStorageService.getToken();
+      }
+
       if (layer.type === 'Imagery') {
         if (layer.base && !baseLayerFound) {
           layer.options = {selected: true};
@@ -244,6 +248,8 @@ function MageController($scope, $compile, $timeout, $animate, $document, $uibMod
             }
           });
         });
+      } else if (layer.type === 'GeoPackage') {
+        MapService.createGeoPackageLayer(layer);
       }
     });
 

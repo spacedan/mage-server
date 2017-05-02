@@ -3,6 +3,9 @@ module.exports = function(app, security) {
     , Event = require('../models/event')
     , access = require('../access')
     , api = require('../api')
+    , path = require('path')
+    , fs = require('fs-extra')
+    , environment = require('environment')
     , layerXform = require('../transformers/layer');
 
   var passport = security.authentication.passport;
@@ -91,6 +94,34 @@ module.exports = function(app, security) {
           type: 'FeatureCollection',
           features: features
         });
+      });
+    }
+  );
+
+  // get geopackage for layer (must be a geopackage layer)
+  app.get(
+    '/api/layers/:layerId/geopackage',
+    access.authorize('READ_LAYER_ALL'),
+    function (req, res) {
+      if (req.layer.type !== 'GeoPackage') return res.status(400).send('cannot get GeoPackage, layer type is not "GeoPackage"');
+
+      var finalDir = path.join(environment.attachmentBaseDirectory, req.layer.id);
+      var finalPath = path.join(finalDir, 'geopackage.gpkg');
+
+      var stream = fs.createReadStream(finalPath);
+
+      stream.on('open', function() {
+        res.writeHead(200, {
+          "Content-Disposition": 'attachment; filename="geopackage.gpkg"',
+          "Content-Type": 'application/octet-stream'
+        });
+
+        stream.pipe(res);
+      });
+
+      stream.on('error', function(err) {
+        console.log('error streaming geopackage', err);
+        return res.sendStatus(404);
       });
     }
   );
