@@ -1,8 +1,11 @@
+var angular = require('angular');
+
+module.exports = 'FilterCOntroller';
 angular
   .module('mage')
-  .controller('FilterController', FilterController);
+  .controller(module.exports, FilterController);
 
-FilterController.$inject = ['$scope', '$uibModalInstance', 'EventService', 'FilterService', 'Event', 'events'];
+FilterController.$inject = ['$scope', '$uibModalInstance', 'EventService', require('../factories/filter.service'), 'Event', 'events'];
 
 function FilterController($scope, $uibModalInstance, EventService, FilterService, Event, events) {
   $scope.events = events;

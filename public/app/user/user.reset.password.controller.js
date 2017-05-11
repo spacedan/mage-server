@@ -2,7 +2,7 @@ angular
   .module('mage')
   .controller('UserResetPasswordController', UserResetPasswordController);
 
-UserResetPasswordController.$inject =  ['$scope', '$timeout', '$location', 'Api', 'UserService', 'user'];
+UserResetPasswordController.$inject =  ['$scope', '$timeout', '$location', require('../factories/api.resource'), require('../factories/user.service'), 'user'];
 
 function UserResetPasswordController($scope, $timeout, $location, Api, UserService, user) {
   if (!user) {

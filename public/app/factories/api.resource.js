@@ -1,6 +1,10 @@
+var angular = require('angular');
+
+module.exports = 'Api';
+
 angular
 	.module('mage')
-	.factory('Api', Api);
+	.factory(module.exports, Api);
 
 Api.$inject = ['$resource'];
 

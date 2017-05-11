@@ -2,9 +2,9 @@ angular
   .module('mage')
   .controller('SignupController', SignupController);
 
-SignupController.$inject = ['$scope', '$location', 'UserService', 'Api'];
+SignupController.$inject = ['$scope', '$location', 'UserService', 'api' /* injected resource promise */];
 
-function SignupController($scope, $location, UserService, Api) {
+function SignupController($scope, $location, UserService, api) {
   $scope.user = {};
   $scope.showStatus = false;
   $scope.statusTitle = '';

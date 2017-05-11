@@ -1,6 +1,10 @@
+var angular = require('angular');
+
+module.exports = 'Settings';
+
 angular
 	.module('mage')
-	.factory('Settings', Settings);
+	.factory(module.exports, Settings);
 
 Settings.$inject = ['$resource'];
 

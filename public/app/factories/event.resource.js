@@ -1,8 +1,12 @@
+var angular = require('angular');
+
+module.exports = 'Event';
+
 angular
   .module('mage')
-  .factory('Event', Event);
+  .factory(module.exports, Event);
 
-Event.$inject = ['$rootScope', '$resource', '$http', 'LocalStorageService'];
+Event.$inject = ['$rootScope', '$resource', '$http', require('./local-storage.service')];
 
 function Event($rootScope, $resource, $http, LocalStorageService) {
   var Event = $resource('/api/events/:id', {

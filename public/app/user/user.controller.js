@@ -2,7 +2,7 @@ angular
   .module('mage')
   .controller('UserController', UserController);
 
-UserController.$inject =  ['$scope', '$location', '$timeout', 'Api', 'UserService', 'user'];
+UserController.$inject =  ['$scope', '$location', '$timeout', require('../factories/api.resource'), require('../factories/user.service'), 'user'];
 
 function UserController($scope, $location, $timeout, Api, UserService, user) {
   $scope.user = user;

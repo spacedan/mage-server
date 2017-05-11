@@ -1,3 +1,6 @@
+var angular = require('angular')
+  , _ = require('underscore');
+
 angular
   .module('mage')
   .controller('MageController', MageController);
@@ -13,7 +16,7 @@ MageController.$inject = [
   'FilterService',
   'EventService',
   'MapService',
-  'LocalStorageService',
+  require('../factories/local-storage.service'),
   'Observation',
   'Location',
   'LocationService',

@@ -2,7 +2,7 @@ angular
   .module('mage')
   .controller('SetupController', SetupController);
 
-SetupController.$inject = ['$scope', '$http', '$location', 'UserService', 'api'];
+SetupController.$inject = ['$scope', '$http', '$location', 'UserService', require('./factories/api.resource')];
 
 function SetupController($scope, $http, $location, UserService, api) {
   $scope.account = {};

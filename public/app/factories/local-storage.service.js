@@ -1,6 +1,10 @@
+var angular = require('angular');
+
+module.exports = 'LocalStorageService';
+
 angular
   .module('mage')
-  .factory('LocalStorageService', LocalStorageService);
+  .factory(module.exports, LocalStorageService);
 
 LocalStorageService.$inject = [];
 

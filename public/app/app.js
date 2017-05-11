@@ -2,20 +2,7 @@
 if (!Date.now) { Date.now = function() { return +(new Date); }; }
 
 angular
-  .module("mage", [
-    "ui.bootstrap",
-    "ui.select",
-    "minicolors",
-    "ngAnimate",
-    "ngSanitize",
-    "ngRoute",
-    "ngResource",
-    "ngMessages",
-    "http-auth-interceptor",
-    "com.2fdevs.videogular",
-    "com.2fdevs.videogular.plugins.controls",
-    "com.2fdevs.videogular.plugins.overlayplay"
-  ]).config(config).run(run);
+  .module("mage").config(config).run(run);
 
 config.$inject = ['$provide', '$httpProvider', '$routeProvider', '$animateProvider'];
 
@@ -27,7 +14,7 @@ function config($provide, $httpProvider, $routeProvider, $animateProvider) {
 
   function resolveLogin() {
     return {
-      user: ['UserService', function(UserService) {
+      user: [require('./factories/user.service'), function(UserService) {
         return UserService.getMyself();
       }]
     };
@@ -35,7 +22,7 @@ function config($provide, $httpProvider, $routeProvider, $animateProvider) {
 
   function resolveAdmin() {
     return {
-      user: ['$q', 'UserService', function($q, UserService) {
+      user: ['$q',require('./factories/user.service'), function($q, UserService) {
         var deferred = $q.defer();
 
         UserService.getMyself().then(function(myself) {
@@ -53,7 +40,7 @@ function config($provide, $httpProvider, $routeProvider, $animateProvider) {
 
   $routeProvider.when('/', {
     resolve: {
-      api: ['$location', 'Api', function($location, Api) {
+      api: ['$location', require('./factories/api.resource'), function($location, Api) {
         Api.get(function(api) {
           if (api.initial) {
             $location.path('/setup');
@@ -69,7 +56,7 @@ function config($provide, $httpProvider, $routeProvider, $animateProvider) {
     templateUrl: 'app/setup/setup.html',
     controller: 'SetupController',
     resolve: {
-      api: ['$q', '$location', 'Api', function($q, $location, Api) {
+      api: ['$q', '$location', require('./factories/api.resource'), function($q, $location, Api) {
         var deferred = $q.defer();
         Api.get(function(api) {
           if (!api.initial) {
@@ -86,9 +73,9 @@ function config($provide, $httpProvider, $routeProvider, $animateProvider) {
 
   $routeProvider.when('/signin', {
     templateUrl: 'app/signin/signin.html',
-    controller: 'SigninController',
+    controller: require('./signin/signin.controller'),
     resolve: {
-      api: ['$q', '$location', 'Api', function($q, $location, Api) {
+      api: ['$q', '$location', require('./factories/api.resource'), function($q, $location, Api) {
         var deferred = $q.defer();
         Api.get(function(api) {
           if (api.initial) {
@@ -97,7 +84,7 @@ function config($provide, $httpProvider, $routeProvider, $animateProvider) {
             deferred.resolve(api);
           }
         });
-
+        console.log('deferred', deferred);
         return deferred.promise;
       }]
     }
@@ -107,7 +94,7 @@ function config($provide, $httpProvider, $routeProvider, $animateProvider) {
     templateUrl: 'app/signup/signup.html',
     controller: 'SignupController',
     resolve: {
-      api: ['$q', '$location', 'Api', function($q, $location, Api) {
+      api: ['$q', '$location', require('./factories/api.resource'), function($q, $location, Api) {
         var deferred = $q.defer();
         Api.get(function(api) {
           if (api.initial) {
@@ -277,7 +264,7 @@ function config($provide, $httpProvider, $routeProvider, $animateProvider) {
   });
 }
 
-run.$inject = ['$rootScope', '$route', '$uibModal', 'UserService', '$location', 'authService', 'LocalStorageService', 'Api'];
+run.$inject = ['$rootScope', '$route', '$uibModal', require('./factories/user.service'), '$location', 'authService', require('./factories/local-storage.service'), require('./factories/api.resource')];
 
 function run($rootScope, $route, $uibModal, UserService, $location, authService, LocalStorageService, Api) {
   $rootScope.$on('event:auth-loginRequired', function() {

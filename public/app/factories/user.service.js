@@ -1,8 +1,13 @@
+var angular = require('angular')
+  , $ = require('jquery');
+
+module.exports = 'UserService';
+
 angular
   .module('mage')
-  .factory('UserService', UserService);
+  .factory(module.exports, UserService);
 
-UserService.$inject = ['$rootScope', '$q', '$http', '$location', '$timeout', '$window', 'LocalStorageService'];
+UserService.$inject = ['$rootScope', '$q', '$http', '$location', '$timeout', '$window', require('./local-storage.service')];
 
 function UserService($rootScope, $q, $http, $location, $timeout, $window, LocalStorageService) {
   var userDeferred = $q.defer();

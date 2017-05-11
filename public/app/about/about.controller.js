@@ -1,8 +1,12 @@
+var angular = require('angular');
+
+module.exports = 'AboutController';
+
 angular
   .module('mage')
-  .controller('AboutController', AboutController);
+  .controller(module.exports, AboutController);
 
-AboutController.$inject = ['$scope', 'Api'];
+AboutController.$inject = ['$scope', require('../factories/api.resource')];
 
 function AboutController ($scope, Api) {
 

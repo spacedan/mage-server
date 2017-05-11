@@ -1,8 +1,9 @@
+var angular = require('angular');
 angular
   .module('mage')
   .service('EventService', EventService);
 
-EventService.$inject = ['$rootScope', '$q', '$timeout', '$http', 'Event', 'ObservationService', 'LocationService', 'LayerService', 'FilterService', 'PollingService', 'UserService'];
+EventService.$inject = ['$rootScope', '$q', '$timeout', '$http', require('./event.resource'), 'ObservationService', 'LocationService', 'LayerService', require('./filter.service'), require('./polling.service'), require('./user.service')];
 
 function EventService($rootScope, $q, $timeout, $http, Event, ObservationService, LocationService, LayerService, FilterService, PollingService, UserService) {
   var observationsChangedListeners = [];

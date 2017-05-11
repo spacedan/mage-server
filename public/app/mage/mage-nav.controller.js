@@ -1,8 +1,12 @@
+var angular = require('angular');
+
+module.exports = 'NavController';
+
 angular
   .module('mage')
-  .controller('NavController', NavController);
+  .controller(module.exports, NavController);
 
-NavController.$inject =  ['$rootScope', '$scope', '$q', '$location', '$uibModal', 'UserService', 'FilterService', 'PollingService', 'Event', 'Settings'];
+NavController.$inject =  ['$rootScope', '$scope', '$q', '$location', '$uibModal', require('../factories/user.service'), require('../factories/filter.service'), require('../factories/polling.service'), require('../factories/event.resource'), require('../admin/settings/settings.resource')];
 
 function NavController($rootScope, $scope, $q, $location, $uibModal, UserService, FilterService, PollingService, Event, Settings) {
   var events = [];

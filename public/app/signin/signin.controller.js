@@ -1,8 +1,13 @@
+var angular = require('angular')
+  , _ = require('underscore');
+
+module.exports = 'SigninController';
+
 angular
   .module('mage')
-  .controller('SigninController', SigninController);
+  .controller(module.exports, SigninController);
 
-SigninController.$inject = ['$scope', '$rootScope', 'UserService', 'api'];
+SigninController.$inject = ['$scope', '$rootScope', require('../factories/user.service'), 'api' /* injected resource promise */];
 
 function SigninController($scope, $rootScope, UserService, api) {
   $scope.status = 0;
