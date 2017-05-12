@@ -1,3 +1,8 @@
+var angular = require('angular')
+  , _ = require('underscore');
+
+require('../filters/moment.filter');
+
 angular
   .module('mage')
   .directive('newsFeed', newsFeed);

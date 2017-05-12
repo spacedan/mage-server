@@ -1,8 +1,13 @@
+var angular = require('angular')
+  , _ = require('underscore');
+
+module.exports = 'ObservationService';
+
 angular
   .module('mage')
-  .factory('ObservationService', ObservationService);
+  .factory(module.exports, ObservationService);
 
-ObservationService.$inject = ['$q', 'Observation', 'ObservationAttachment', 'ObservationState', 'ObservationImportant', 'ObservationFavorite', 'LocalStorageService'];
+ObservationService.$inject = ['$q', require('./observation.resource').Observation, require('./observation.resource').ObservationAttachment, require('./observation.resource').ObservationState, require('./observation.resource').ObservationImportant, require('./observation.resource').ObservationFavorite, require('./local-storage.service')];
 
 function ObservationService($q, Observation, ObservationAttachment, ObservationState, ObservationImportant, ObservationFavorite, LocalStorageService) {
   var service = {

@@ -1,3 +1,11 @@
+var angular = require('angular')
+  , _ = require('underscore')
+  , locationMarker = require('../leaflet-extensions/LocationMarker')
+  , GroupedLayerControl = require('leaflet-groupedlayercontrol')
+  , MarkerCluster = require('leaflet.markercluster')
+  // , GeoSearch = require('leaflet-geosearch')
+  , MageControls = require('../leaflet-extensions/MageControls');
+
 angular
   .module('mage')
   .directive('leaflet', leaflet);
@@ -13,7 +21,7 @@ function leaflet() {
   return directive;
 }
 
-LeafletController.$inject = ['$rootScope', '$scope', '$interval', '$timeout', 'MapService', 'LocalStorageService'];
+LeafletController.$inject = ['$rootScope', '$scope', '$interval', '$timeout', require('../factories/map.service'), require('../factories/local-storage.service')];
 
 function LeafletController($rootScope, $scope, $interval, $timeout, MapService, LocalStorageService) {
 
@@ -21,7 +29,7 @@ function LeafletController($rootScope, $scope, $interval, $timeout, MapService, 
   var temporalLayers = [];
   var spiderfyState = null;
   var currentLocation = null;
-  var locationLayer = L.locationMarker([0,0], {color: '#136AEC'});
+  var locationLayer = locationMarker([0,0], {color: '#136AEC'});
   var map = L.map("map", {
     center: [0,0],
     zoom: 3,
@@ -31,18 +39,18 @@ function LeafletController($rootScope, $scope, $interval, $timeout, MapService, 
   });
 
   // toolbar  and controls config
-  new L.Control.GeoSearch({
-    provider: new L.GeoSearch.Provider.OpenStreetMap(),
-    showMarker: false
-  }).addTo(map);
+  // new L.Control.GeoSearch({
+  //   provider: new L.GeoSearch.Provider.OpenStreetMap(),
+  //   showMarker: false
+  // }).addTo(map);
 
-  new L.Control.MageFeature({
+  new MageControls.MageFeature({
     onClick: function(latlng) {
       $scope.$emit('observation:create', latlng.wrap());
     }
   }).addTo(map);
 
-  var userLocationControl = new L.Control.MageUserLocation({
+  var userLocationControl = new MageControls.MageUserLocation({
     onBroadcastLocationClick: function(callback) {
       MapService.onBroadcastLocation(callback);
     },
@@ -51,7 +59,7 @@ function LeafletController($rootScope, $scope, $interval, $timeout, MapService, 
   });
   map.addControl(userLocationControl);
 
-  var feedControl = new L.Control.MageListTools({
+  var feedControl = new MageControls.MageListTools({
     onToggle: function(toggle) {
       $scope.$emit('feed:toggle', toggle);
     }

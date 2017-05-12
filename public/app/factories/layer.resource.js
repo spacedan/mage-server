@@ -1,6 +1,10 @@
+var angular = require('angular');
+
+module.exports = 'Layer';
+
 angular
 	.module('mage')
-	.factory('Layer', Layer);
+	.factory(module.exports, Layer);
 
 Layer.$inject = ['$resource'];
 

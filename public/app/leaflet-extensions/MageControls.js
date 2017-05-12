@@ -1,4 +1,4 @@
-L.Control.MageFeature = L.Control.extend({
+module.exports.MageFeature = L.Control.MageFeature = L.Control.extend({
   options: {
     position: 'topleft',
     enabled: true
@@ -27,7 +27,7 @@ L.Control.MageFeature = L.Control.extend({
   }
 });
 
-L.Control.MageUserLocation = L.Control.extend({
+module.exports.MageUserLocation = L.Control.MageUserLocation = L.Control.extend({
   options: {
     position: 'topleft',
     enabled: true
@@ -151,7 +151,7 @@ L.Control.MageUserLocation = L.Control.extend({
   }
 });
 
-L.Control.MageListTools = L.Control.extend({
+module.exports.MageListTools = L.Control.MageListTools = L.Control.extend({
   options: {
     position: 'topleft',
     enabled: true

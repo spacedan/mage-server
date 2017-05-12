@@ -1,6 +1,11 @@
+var angular = require('angular')
+  , _ = require('underscore');
+
+module.exports = 'MapService';
+
 angular
   .module('mage')
-  .factory('MapService', MapService);
+  .factory(module.exports, MapService);
 
 MapService.$inject = [];
 

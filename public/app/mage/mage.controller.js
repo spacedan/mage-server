@@ -1,9 +1,14 @@
 var angular = require('angular')
   , _ = require('underscore');
 
+require('./leaflet.directive');
+require('./feed.directive');
+
+module.exports = 'MageController';
+
 angular
   .module('mage')
-  .controller('MageController', MageController);
+  .controller(module.exports, MageController);
 
 MageController.$inject = [
   '$scope',
@@ -12,15 +17,15 @@ MageController.$inject = [
   '$animate',
   '$document',
   '$uibModal',
-  'UserService',
-  'FilterService',
-  'EventService',
-  'MapService',
+  require('../factories/user.service'),
+  require('../factories/filter.service'),
+  require('../factories/event.service'),
+  require('../factories/map.service'),
   require('../factories/local-storage.service'),
-  'Observation',
-  'Location',
-  'LocationService',
-  'FeatureService'
+  require('../factories/observation.resource').Observation,
+  require('../factories/location.resource'),
+  require('../factories/location.service'),
+  require('../factories/feature.service')
 ];
 
 function MageController($scope, $compile, $timeout, $animate, $document, $uibModal, UserService, FilterService, EventService, MapService, LocalStorageService, Observation, Location, LocationService, FeatureService) {

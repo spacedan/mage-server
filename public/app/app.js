@@ -249,7 +249,7 @@ function config($provide, $httpProvider, $routeProvider, $animateProvider) {
   });
   $routeProvider.when('/map', {
     templateUrl:    'app/mage/mage.html',
-    controller:     "MageController",
+    controller:     'MageController',
     resolve: resolveLogin()
   });
   $routeProvider.when('/user', {

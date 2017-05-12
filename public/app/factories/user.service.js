@@ -1,5 +1,6 @@
 var angular = require('angular')
-  , $ = require('jquery');
+  , $ = require('jquery')
+  , _ = require('underscore');
 
 module.exports = 'UserService';
 

@@ -1,4 +1,5 @@
-var angular = require('angular');
+var angular = require('angular')
+  , _ = require('underscore');
 
 module.exports = 'NavController';
 

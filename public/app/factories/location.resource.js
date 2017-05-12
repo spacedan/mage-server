@@ -1,6 +1,10 @@
+var angular = require('angular');
+
+module.exports = 'Location';
+
 angular
 	.module('mage')
-	.factory('Location', Location);
+	.factory(module.exports, Location);
 
 Location.$inject = ['$resource'];
 

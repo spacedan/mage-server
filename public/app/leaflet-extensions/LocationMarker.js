@@ -1,3 +1,5 @@
+var L = require('leaflet');
+
 L.LocationMarker = L.Marker.extend({
   initialize: function (latlng, options) {
     L.Marker.prototype.initialize.call(this, latlng);
@@ -109,6 +111,6 @@ L.LocationMarker = L.Marker.extend({
 
 });
 
-L.locationMarker = function (latlng, options) {
+module.exports = L.locationMarker = function (latlng, options) {
   return new L.LocationMarker(latlng, options);
 };

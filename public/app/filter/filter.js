@@ -1,11 +1,13 @@
-var angular = require('angular');
+var angular = require('angular')
+  , angularUISelect = require('ui-select')
+  , moment = require('moment');
 
-module.exports = 'FilterCOntroller';
+module.exports = 'FilterController';
 angular
   .module('mage')
   .controller(module.exports, FilterController);
 
-FilterController.$inject = ['$scope', '$uibModalInstance', 'EventService', require('../factories/filter.service'), 'Event', 'events'];
+FilterController.$inject = ['$scope', '$uibModalInstance', require('../factories/event.service'), require('../factories/filter.service'), require('../factories/event.resource'), 'events'];
 
 function FilterController($scope, $uibModalInstance, EventService, FilterService, Event, events) {
   $scope.events = events;
