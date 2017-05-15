@@ -1,7 +1,6 @@
 <div class="user-popup">
 
   <div avatar-user="user"/>
-
   <div class="user-popup-content">
     <div class="observation-popup-title">
       <strong>{{user.displayName}}</strong>
@@ -16,7 +15,6 @@
       <span class="muted" ng-if="user.phones && user.phones.length && user.phones[0].number">{{user.phones[0].number}}</span>
     </div>
   </div>
-
   <div class="user-popup-actions">
     <div>
       <a href="javascript:void(0)" title="Show in feed" class="location-popup-info" ng-click="onInfoClicked()"><i class="fa fa-info-circle right-gap"></i></a>

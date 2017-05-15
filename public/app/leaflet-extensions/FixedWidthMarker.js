@@ -1,3 +1,5 @@
+var fixedWidthIcon = require('./FixedWidthIcon');
+
 L.FixedWidthMarker = L.Marker.extend({
 
   initialize: function(latlng, options) {

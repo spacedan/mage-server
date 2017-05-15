@@ -1,6 +1,8 @@
 var angular = require('angular')
   , _ = require('underscore')
+  , moment = require('moment')
   , locationMarker = require('../leaflet-extensions/LocationMarker')
+  , fixedWidthMarker = require('../leaflet-extensions/FixedWidthMarker')
   , GroupedLayerControl = require('leaflet-groupedlayercontrol')
   , MarkerCluster = require('leaflet.markercluster')
   // , GeoSearch = require('leaflet-geosearch')

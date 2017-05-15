@@ -1,7 +1,11 @@
 var angular = require('angular')
-  , _ = require('underscore');
+  , _ = require('underscore')
+  , moment = require('moment');
 
 require('../filters/moment.filter');
+require('../observation/form/form.directive');
+require('../observation/observation-feed.directive');
+require('../user/user-feed.directive');
 
 angular
   .module('mage')

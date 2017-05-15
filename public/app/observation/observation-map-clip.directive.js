@@ -1,3 +1,7 @@
+var angular = require('angular');
+
+require('../leaflet-extensions/worldExtentControl');
+
 angular
   .module('mage')
   .directive('mapClip', mapClip);

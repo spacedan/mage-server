@@ -1,3 +1,6 @@
+var angular = require('angular')
+  , moment = require('moment');
+
 angular
   .module('mage')
   .directive('locationPopup', locationPopup);
@@ -17,7 +20,7 @@ function locationPopup() {
   return directive;
 }
 
-LocationPopupController.$inject = ['$scope', 'LocalStorageService'];
+LocationPopupController.$inject = ['$scope', require('../factories/local-storage.service')];
 
 function LocationPopupController($scope, LocalStorageService) {
   $scope.date = moment($scope.user.location.properties.timestamp).format("YYYY-MM-DD HH:mm:ss");

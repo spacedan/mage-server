@@ -1,3 +1,5 @@
+var angular = require('angular');
+
 angular
   .module('mage')
   .directive('avatarUserEdit', avatarUserEdit);

@@ -1,5 +1,6 @@
 var angular = require('angular')
-  , _ = require('underscore');
+  , _ = require('underscore')
+  , moment = require('moment');
 
 module.exports = 'EventService';
 

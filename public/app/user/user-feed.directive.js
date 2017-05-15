@@ -1,3 +1,8 @@
+var angular = require('angular')
+  , moment = require('moment');
+
+require('./user-avatar.directive');
+
 angular
   .module('mage')
   .directive('userNewsItem', userNewsItem);
@@ -16,7 +21,7 @@ function userNewsItem() {
   return directive;
 }
 
-UserNewsItemController.$inject = ['$scope', 'LocalStorageService'];
+UserNewsItemController.$inject = ['$scope', require('../factories/local-storage.service')];
 
 function UserNewsItemController($scope, LocalStorageService) {
   $scope.followingUserId = null;

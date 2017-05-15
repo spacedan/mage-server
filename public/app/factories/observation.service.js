@@ -1,5 +1,7 @@
 var angular = require('angular')
-  , _ = require('underscore');
+  , _ = require('underscore')
+  , $ = require('jquery')
+  , moment = require('moment');
 
 module.exports = 'ObservationService';
 

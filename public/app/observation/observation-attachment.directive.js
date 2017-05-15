@@ -18,7 +18,7 @@ function attachment() {
   return directive;
 }
 
-AttachmentController.$inject = ['$scope', '$filter', 'UserService', 'LocalStorageService'];
+AttachmentController.$inject = ['$scope', '$filter', require('../factories/user.service'), require('../factories/local-storage.service')];
 
 function AttachmentController($scope, $filter, UserService, LocalStorageService) {
   $scope.amAdmin = UserService.amAdmin;

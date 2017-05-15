@@ -1,14 +1,16 @@
-angular
-  .module('mage')
-  .controller('ExportController', ExportController);
+var $ = require('jquery')
+  , fileDownload = require('jquery-file-download')
+  , moment = require('moment');
 
-ExportController.$inject = ['$scope', '$uibModalInstance', 'LocalStorageService', 'FilterService', 'events'];
+module.exports = ExportController;
+
+ExportController.$inject = ['$scope', '$uibModalInstance', require('../factories/local-storage.service'), require('../factories/filter.service'), 'events'];
 
 function ExportController($scope, $uibModalInstance, LocalStorageService, FilterService, events) {
   $scope.exportEvent = {selected: FilterService.getEvent()};
   $scope.events = events;
 
-  var fileExport = angular.element('#file-export');
+  var fileExport = $('#file-export');
   fileExport.load(function() {
     alert('file download is complete');
   });
@@ -92,7 +94,7 @@ function ExportController($scope, $uibModalInstance, LocalStorageService, Filter
         var end = endDate.format("YYYY-MM-DD HH:mm:ss");
       }
     } else if ($scope.exportTime.value) {
-      start = moment().subtract('seconds', $scope.exportTime.value).utc().format("YYYY-MM-DD HH:mm:ss");
+      start = moment().subtract($scope.exportTime.value).utc().format("YYYY-MM-DD HH:mm:ss", 'seconds');
     }
 
     var params = {

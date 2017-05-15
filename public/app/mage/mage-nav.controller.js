@@ -1,11 +1,6 @@
-var angular = require('angular')
-  , _ = require('underscore');
+var _ = require('underscore');
 
-module.exports = 'NavController';
-
-angular
-  .module('mage')
-  .controller(module.exports, NavController);
+module.exports = NavController;
 
 NavController.$inject =  ['$rootScope', '$scope', '$q', '$location', '$uibModal', require('../factories/user.service'), require('../factories/filter.service'), require('../factories/polling.service'), require('../factories/event.resource'), require('../admin/settings/settings.resource')];
 

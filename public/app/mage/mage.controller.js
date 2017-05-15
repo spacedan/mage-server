@@ -3,12 +3,10 @@ var angular = require('angular')
 
 require('./leaflet.directive');
 require('./feed.directive');
+require('../observation/observation-popup.directive');
+require('../user/user-popup.directive');
 
-module.exports = 'MageController';
-
-angular
-  .module('mage')
-  .controller(module.exports, MageController);
+module.exports = MageController;
 
 MageController.$inject = [
   '$scope',

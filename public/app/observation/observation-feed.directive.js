@@ -1,3 +1,9 @@
+var _ = require('underscore')
+  , moment = require('moment');
+
+require('./observation-map-clip.directive');
+require('./observation-attachment.directive');
+
 angular
   .module('mage')
   .directive('observationNewsItem', observationNewsItem);
@@ -15,7 +21,7 @@ function observationNewsItem() {
   return directive;
 }
 
-ObservationNewsItemController.$inject = ['$scope', '$window', '$uibModal', 'EventService', 'UserService', 'LocalStorageService'];
+ObservationNewsItemController.$inject = ['$scope', '$window', '$uibModal', require('../factories/event.service'), require('../factories/user.service'), require('../factories/local-storage.service')];
 
 function ObservationNewsItemController($scope, $window, $uibModal, EventService, UserService, LocalStorageService) {
   $scope.edit = false;

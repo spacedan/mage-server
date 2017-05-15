@@ -2,7 +2,13 @@
 if (!Date.now) { Date.now = function() { return +(new Date); }; }
 
 angular
-  .module("mage").config(config).run(run);
+  .module("mage")
+  .controller('FilterController', require('./filter/filter'))
+  .controller('NavController', require('./mage/mage-nav.controller'))
+  .controller('MageController', require('./mage/mage.controller'))
+  .controller('ExportController', require('./export/export'))
+  .controller('SigninController', require('./signin/signin.controller'))
+  .config(config).run(run);
 
 config.$inject = ['$provide', '$httpProvider', '$routeProvider', '$animateProvider'];
 

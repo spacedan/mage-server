@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 angular
   .module('mage')
   .filter('moment', momentFilter);

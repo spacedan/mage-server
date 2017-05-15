@@ -1,3 +1,7 @@
+var angular = require('angular')
+  , $ = require('jquery')
+  , EXIF = require('exif-js');
+
 angular
   .module('mage')
   .directive('avatarUser', avatarUser);
@@ -17,7 +21,7 @@ function avatarUser() {
   return directive;
 }
 
-AvatarUserController.$inject = ['$scope', '$element', '$http', 'LocalStorageService'];
+AvatarUserController.$inject = ['$scope', '$element', '$http', require('../factories/local-storage.service')];
 
 function AvatarUserController($scope, $element, $http, LocalStorageService) {
   if (!$scope.avatarWidth) $scope.avatarWidth = 60;

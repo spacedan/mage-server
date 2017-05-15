@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 L.FixedWidthIcon = L.DivIcon.extend({
   options: {
     className: 'mage-icon',

@@ -1,3 +1,7 @@
+var angular = require('angular')
+  , moment = require('moment');
+
+
 angular
   .module('mage')
   .directive('observationPopup', observationPopup);
