@@ -1,20 +1,7 @@
-angular
-  .module('mage')
-  .directive('fileChange', function() {
-    return {
-      restrict: 'A',
-      link: function (scope, element, attrs) {
-        var fileChangeFunc = scope.$eval(attrs.fileChange);
-        element.bind('change', fileChangeFunc);
-      }
-    };
-  });
 
-angular
-  .module('mage')
-  .controller('AdminUserBulkController', AdminUserBulkController);
+module.exports = AdminUserBulkController;
 
-AdminUserBulkController.$inject = ['$scope', '$filter', '$routeParams', '$location', '$q', 'LocalStorageService', 'UserService', 'Team'];
+AdminUserBulkController.$inject = ['$scope', '$filter', '$routeParams', '$location', '$q', require('../../factories/local-storage.service'), require('../../factories/user.service'), require('../../factories/team.resource')];
 
 function AdminUserBulkController($scope, $filter, $routeParams, $location, $q, LocalStorageService, UserService, Team) {
   var requiredFields = ['username', 'displayname', 'password'];

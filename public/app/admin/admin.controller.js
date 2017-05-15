@@ -1,8 +1,11 @@
-angular
-  .module('mage')
-  .controller('AdminController', AdminController);
+var _ = require('underscore')
+  , moment = require('moment')
+  , offsetFilter = require('../filters/paging-offset.filter')
+  , userFilter = require('../filters/user.filter');
 
-AdminController.$inject = ['$scope', '$routeParams', '$location', '$filter', 'UserService', 'DeviceService', 'LoginService', 'Team', 'Event', 'Layer'];
+module.exports = AdminController;
+
+AdminController.$inject = ['$scope', '$routeParams', '$location', '$filter', require('../factories/user.service'), require('../factories/device.service'), require('../factories/login.service'), require('../factories/team.resource'), require('../factories/event.resource'), require('../factories/layer.resource')];
 
 function AdminController($scope, $routeParams, $location, $filter, UserService, DeviceService, LoginService, Team, Event, Layer) {
   $scope.currentAdminPanel = $routeParams.adminPanel || "";

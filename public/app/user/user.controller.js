@@ -1,6 +1,6 @@
-angular
-  .module('mage')
-  .controller('UserController', UserController);
+require('./user-avatar-edit.directive');
+
+module.exports = UserController;
 
 UserController.$inject =  ['$scope', '$location', '$timeout', require('../factories/api.resource'), require('../factories/user.service'), 'user'];
 

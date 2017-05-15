@@ -1,8 +1,7 @@
-angular
-  .module('mage')
-  .controller('AdminTeamDeleteController', AdminTeamDeleteController);
 
-AdminTeamDeleteController.$inject = ['$scope', '$q', '$uibModalInstance', 'UserService', 'team'];
+module.exports = AdminTeamDeleteController;
+
+AdminTeamDeleteController.$inject = ['$scope', '$q', '$uibModalInstance', require('../../factories/user.service'), 'team'];
 
 function AdminTeamDeleteController($scope, $q, $uibModalInstance, UserService, team) {
   $scope.team = team;

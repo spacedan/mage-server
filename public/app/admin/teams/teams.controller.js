@@ -1,8 +1,8 @@
-angular
-  .module('mage')
-  .controller('AdminTeamsController', AdminTeamsController);
+var _ = require('underscore');
 
-AdminTeamsController.$inject = ['$scope', '$uibModal', '$filter', '$location', 'Team'];
+module.exports = AdminTeamsController;
+
+AdminTeamsController.$inject = ['$scope', '$uibModal', '$filter', '$location', require('../../factories/team.resource')];
 
 function AdminTeamsController($scope, $uibModal, $filter, $location, Team) {
   $scope.teams = [];

@@ -1,4 +1,7 @@
 window.jQuery = window.$ = require('jquery');
+
+require('jquery-minicolors');
+
 var angular = require('angular');
 
 require('angular-ui-bootstrap');

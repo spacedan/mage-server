@@ -1,8 +1,8 @@
-angular
-  .module('mage')
-  .controller('AdminUserController', AdminUserController);
+var _ = require('underscore');
 
-AdminUserController.$inject = ['$scope', '$uibModal', '$filter', '$routeParams', '$location', '$q', 'LocalStorageService', 'UserService', 'LoginService', 'DeviceService', 'Team'];
+module.exports = AdminUserController;
+
+AdminUserController.$inject = ['$scope', '$uibModal', '$filter', '$routeParams', '$location', '$q', require('../../factories/local-storage.service'), require('../../factories/user.service'), require('../../factories/login.service'), require('../../factories/device.service'), require('../../factories/team.resource')];
 
 function AdminUserController($scope, $uibModal, $filter, $routeParams, $location, $q, LocalStorageService, UserService, LoginService, DeviceService, Team) {
   $scope.userTeams = [];

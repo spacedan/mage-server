@@ -1,4 +1,8 @@
-angular.module('mage').factory('Team', ['$resource', function($resource) {
+var angular = require('angular');
+
+module.exports = 'Team';
+
+angular.module('mage').factory(module.exports, ['$resource', function($resource) {
 
   var Team = $resource('/api/teams/:id', {
     id: '@id'

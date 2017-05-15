@@ -1,8 +1,8 @@
-angular
-  .module('mage')
-  .controller('AdminDeviceEditController', AdminDeviceEditController);
+var _ = require('underscore');
 
-AdminDeviceEditController.$inject = ['$scope', '$filter', '$routeParams', '$location', 'LocalStorageService', 'DeviceService', 'UserService'];
+module.exports = AdminDeviceEditController;
+
+AdminDeviceEditController.$inject = ['$scope', '$filter', '$routeParams', '$location', require('../../factories/local-storage.service'), require('../../factories/device.service'), require('../../factories/user.service')];
 
 function AdminDeviceEditController($scope, $filter, $routeParams, $location, LocalStorageService, DeviceService, UserService) {
   $scope.token = LocalStorageService.getToken();

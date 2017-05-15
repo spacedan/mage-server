@@ -1,12 +1,6 @@
-var angular = require('angular');
+module.exports = AdminUserEditController;
 
-module.exports = 'AdminUserEditController';
-
-angular
-  .module('mage')
-  .controller(module.exports, AdminUserEditController);
-
-AdminUserEditController.$inject = ['$scope', '$filter', '$routeParams', '$location', require('../../factories/api.resource'), 'LocalStorageService', 'UserService'];
+AdminUserEditController.$inject = ['$scope', '$filter', '$routeParams', '$location', require('../../factories/api.resource'), require('../../factories/local-storage.service'), require('../../factories/user.service')];
 
 function AdminUserEditController($scope, $filter, $routeParams, $location, Api, LocalStorageService, UserService) {
   $scope.token = LocalStorageService.getToken();

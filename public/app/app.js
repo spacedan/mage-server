@@ -8,7 +8,11 @@ angular
   .controller('MageController', require('./mage/mage.controller'))
   .controller('ExportController', require('./export/export'))
   .controller('SigninController', require('./signin/signin.controller'))
-  .config(config).run(run);
+  .controller('UserController', require('./user/user.controller'))
+  .config(config)
+  .run(run);
+
+require('./admin')('mage');
 
 config.$inject = ['$provide', '$httpProvider', '$routeProvider', '$animateProvider'];
 

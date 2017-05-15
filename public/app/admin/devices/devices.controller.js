@@ -1,8 +1,8 @@
-angular
-  .module('mage')
-  .controller('AdminDevicesController', AdminDevicesController);
+var _ = require('underscore');
 
-AdminDevicesController.$inject = ['$scope', '$uibModal', '$filter', '$location', 'LocalStorageService', 'DeviceService', 'UserService'];
+module.exports = AdminDevicesController;
+
+AdminDevicesController.$inject = ['$scope', '$uibModal', '$filter', '$location', require('../../factories/local-storage.service'), require('../../factories/device.service'), require('../../factories/user.service')];
 
 function AdminDevicesController($scope, $uibModal, $filter, $location, LocalStorageService, DeviceService, UserService) {
   $scope.token = LocalStorageService.getToken();
