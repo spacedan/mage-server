@@ -1,8 +1,8 @@
-angular
-  .module('mage')
-  .controller('AdminSettingsController', AdminSettingsController);
+var _ = require('underscore');
 
-AdminSettingsController.$inject = ['$scope', 'Settings', 'LocalStorageService'];
+module.exports = AdminSettingsController;
+
+AdminSettingsController.$inject = ['$scope', require('./settings.resource'), require('../../factories/local-storage.service')];
 
 function AdminSettingsController($scope, Settings, LocalStorageService) {
   $scope.token = LocalStorageService.getToken();

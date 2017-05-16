@@ -1,10 +1,10 @@
-angular
-  .module('mage')
-  .controller('SignupController', SignupController);
+var _ = require('underscore');
 
-SignupController.$inject = ['$scope', '$location', 'UserService', 'api' /* injected resource promise */];
+module.exports = SignupController;
 
-function SignupController($scope, $location, UserService, api) {
+SignupController.$inject = ['$scope', '$location', require('../factories/user.service'), require('../factories/api.resource')];
+
+function SignupController($scope, $location, UserService, Api) {
   $scope.user = {};
   $scope.showStatus = false;
   $scope.statusTitle = '';

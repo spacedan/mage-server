@@ -1,10 +1,4 @@
-var angular = require('angular');
-
-module.exports = 'AboutController';
-
-angular
-  .module('mage')
-  .controller(module.exports, AboutController);
+module.exports = AboutController;
 
 AboutController.$inject = ['$scope', require('../factories/api.resource')];
 

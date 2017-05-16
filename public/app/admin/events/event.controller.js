@@ -1,8 +1,8 @@
-angular
-  .module('mage')
-  .controller('AdminEventController', AdminEventController);
+var _ = require('underscore');
 
-AdminEventController.$inject = ['$scope', '$location', '$filter', '$routeParams', '$q', '$uibModal', 'LocalStorageService', 'UserService', 'EventService', 'Event', 'Team', 'Layer'];
+module.exports = AdminEventController;
+
+AdminEventController.$inject = ['$scope', '$location', '$filter', '$routeParams', '$q', '$uibModal', require('../../factories/local-storage.service'), require('../../factories/user.service'), require('../../factories/event.service'), require('../../factories/event.resource'), require('../../factories/team.resource'), require('../../factories/layer.resource')];
 
 function AdminEventController($scope, $location, $filter, $routeParams, $q, $uibModal, LocalStorageService, UserService, EventService, Event, Team, Layer) {
   $scope.token = LocalStorageService.getToken();

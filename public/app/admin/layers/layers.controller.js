@@ -1,8 +1,8 @@
-angular
-  .module('mage')
-  .controller('AdminLayersController', AdminLayersController);
+var _ = require('underscore');
 
-AdminLayersController.$inject = ['$scope', '$filter', '$uibModal', '$location', 'Layer'];
+module.exports = AdminLayersController;
+
+AdminLayersController.$inject = ['$scope', '$filter', '$uibModal', '$location', require('../../factories/layer.resource')];
 
 function AdminLayersController($scope, $filter, $uibModal, $location, Layer) {
   $scope.filter = "all";

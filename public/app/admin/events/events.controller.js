@@ -1,8 +1,7 @@
-angular
-  .module('mage')
-  .controller('AdminEventsController', AdminEventsController);
 
-AdminEventsController.$inject = ['$scope', '$location', '$filter', '$uibModal', 'Event'];
+module.exports = AdminEventsController;
+
+AdminEventsController.$inject = ['$scope', '$location', '$filter', '$uibModal', require('../../factories/event.resource')];
 
 function AdminEventsController($scope, $location, $filter, $uibModal, Event) {
   $scope.events = [];

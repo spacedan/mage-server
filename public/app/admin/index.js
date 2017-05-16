@@ -5,6 +5,9 @@ module.exports = function(moduleName) {
     .controller('AdminController', require('./admin.controller'));
 
   require('./devices')(moduleName);
+  require('./events')(moduleName);
+  require('./layers')(moduleName);
+  require('./settings')(moduleName);
   require('./teams')(moduleName);
   require('./users')(moduleName);
 }

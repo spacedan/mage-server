@@ -1,8 +1,10 @@
-angular
-  .module('mage')
-  .controller('AdminEventEditFormController', AdminEventEditFormController);
+var _ = require('underscore');
 
-AdminEventEditFormController.$inject = ['$rootScope', '$scope', '$location', '$filter', '$routeParams', '$q', '$timeout', '$uibModal', 'LocalStorageService', 'EventService', 'Event'];
+require('../../file-upload/file-upload.directive');
+
+module.exports = AdminEventEditFormController;
+
+AdminEventEditFormController.$inject = ['$rootScope', '$scope', '$location', '$filter', '$routeParams', '$q', '$timeout', '$uibModal', require('../../factories/local-storage.service'), require('../../factories/event.service'), require('../../factories/event.resource')];
 
 function AdminEventEditFormController($rootScope, $scope, $location, $filter, $routeParams, $q, $timeout, $uibModal, LocalStorageService, EventService, Event) {
   $scope.unSavedChanges = false;

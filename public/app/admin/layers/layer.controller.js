@@ -1,8 +1,10 @@
-angular
-  .module('mage')
-  .controller('AdminLayerController', AdminLayerController);
+var _ = require('underscore');
 
-AdminLayerController.$inject = ['$scope', '$uibModal', '$routeParams', '$location', '$filter', 'Layer', 'Event', 'LocalStorageService'];
+require('../../file-upload/file-upload.directive');
+
+module.exports = AdminLayerController;
+
+AdminLayerController.$inject = ['$scope', '$uibModal', '$routeParams', '$location', '$filter', require('../../factories/layer.resource'), require('../../factories/event.resource'), require('../../factories/local-storage.service')];
 
 function AdminLayerController($scope, $uibModal, $routeParams, $location, $filter, Layer, Event, LocalStorageService) {
 

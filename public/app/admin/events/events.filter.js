@@ -1,6 +1,6 @@
-angular
-  .module('mage')
-  .filter('events', EventFilter);
+var _ = require('underscore');
+
+module.exports = EventFilter;
 
 EventFilter.$inject = ['$parse'];
 
