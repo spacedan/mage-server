@@ -2,7 +2,7 @@ var _ = require('underscore');
 
 module.exports = NavController;
 
-NavController.$inject =  ['$rootScope', '$scope', '$q', '$location', '$uibModal', require('../factories/user.service'), require('../factories/filter.service'), require('../factories/polling.service'), require('../factories/event.resource'), require('../admin/settings/settings.resource')];
+NavController.$inject =  ['$rootScope', '$scope', '$q', '$location', '$uibModal', require('../factories/user.service').name, require('../factories/filter.service').name, require('../factories/polling.service').name, require('../factories/event.resource').name, require('../factories/settings.resource').name];
 
 function NavController($rootScope, $scope, $q, $location, $uibModal, UserService, FilterService, PollingService, Event, Settings) {
   var events = [];

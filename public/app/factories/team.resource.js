@@ -1,9 +1,12 @@
-var angular = require('angular');
 
-module.exports = 'Team';
+module.exports = {
+  name: 'Team',
+  factory: Team
+};
 
-angular.module('mage').factory(module.exports, ['$resource', function($resource) {
+Team.$inject = ['$resource'];
 
+function Team($resource) {
   var Team = $resource('/api/teams/:id', {
     id: '@id'
   },{
@@ -51,4 +54,4 @@ angular.module('mage').factory(module.exports, ['$resource', function($resource)
   };
 
   return Team;
-}]);
+}

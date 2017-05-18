@@ -1,17 +1,16 @@
 window.jQuery = window.$ = require('jquery');
 
-require('jquery-minicolors');
-
 var angular = require('angular');
 
-require('angular-ui-bootstrap');
-require('angular-ui-select/select');
+require('jquery-minicolors');
 require('angular-minicolors');
 
 angular
   .module("mage", [
-    "ui.bootstrap",
-    "ui.select",
+    require('./app/admin'),
+    require('./app/factories'),
+    require('angular-ui-bootstrap'),
+    require('ui-select'),
     "minicolors",
     require('angular-animate'),
     require('angular-sanitize'),

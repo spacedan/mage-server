@@ -2,7 +2,7 @@ var _ = require('underscore');
 
 module.exports = AdminSettingsController;
 
-AdminSettingsController.$inject = ['$scope', require('./settings.resource'), require('../../factories/local-storage.service')];
+AdminSettingsController.$inject = ['$scope', require('../../factories/settings.resource'), require('../../factories/local-storage.service')];
 
 function AdminSettingsController($scope, Settings, LocalStorageService) {
   $scope.token = LocalStorageService.getToken();

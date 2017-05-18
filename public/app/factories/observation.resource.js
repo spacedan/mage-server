@@ -1,6 +1,7 @@
 var angular = require('angular');
 
 module.exports = {
+  moduleName: 'mage.observation',
   Observation: 'Observation',
   ObservationAttachment: 'ObservationAttachment',
   ObservationFavorite: 'ObservationFavorite',
@@ -8,7 +9,7 @@ module.exports = {
   ObservationState: 'ObservationState'
 };
 
-angular.module('mage').factory(module.exports.Observation, ['$resource', function($resource) {
+angular.module('mage.observation',[]).factory(module.exports.Observation, ['$resource', function($resource) {
 
   var Observation = $resource('/api/events/:eventId/observations/:id', {
     id: '@id',

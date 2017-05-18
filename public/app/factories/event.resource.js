@@ -1,12 +1,10 @@
-var angular = require('angular');
 
-module.exports = 'Event';
+module.exports = {
+  factory: Event,
+  name: 'Event'
+};
 
-angular
-  .module('mage')
-  .factory(module.exports, Event);
-
-Event.$inject = ['$rootScope', '$resource', '$http', require('./local-storage.service')];
+Event.$inject = ['$rootScope', '$resource', '$http', require('./local-storage.service').name];
 
 function Event($rootScope, $resource, $http, LocalStorageService) {
   var Event = $resource('/api/events/:id', {

@@ -1,6 +1,5 @@
-angular
-  .module('mage')
-  .directive('equals', equals);
+
+module.exports = equals;
 
 function equals() {
   return {

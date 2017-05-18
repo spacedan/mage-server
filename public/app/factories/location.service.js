@@ -1,13 +1,11 @@
-var angular = require('angular')
-  , _ = require('underscore');
+var _ = require('underscore');
 
-module.exports = 'LocationService';
+module.exports = {
+  factory: LocationService,
+  name: 'LocationService'
+};
 
-angular
-  .module('mage')
-  .factory(module.exports, LocationService);
-
-LocationService.$inject = ['$q', require('./location.resource'), require('./user.service'), require('./local-storage.service')];
+LocationService.$inject = ['$q', require('./location.resource').name, require('./user.service').name, require('./local-storage.service').name];
 
 function LocationService($q, Location, UserService, LocalStorageService) {
 

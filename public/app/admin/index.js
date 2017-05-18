@@ -1,13 +1,15 @@
 var angular = require('angular');
 
-module.exports = function(moduleName) {
-  angular.module(moduleName)
-    .controller('AdminController', require('./admin.controller'));
+module.exports = 'mage.admin';
 
-  require('./devices')(moduleName);
-  require('./events')(moduleName);
-  require('./layers')(moduleName);
-  require('./settings')(moduleName);
-  require('./teams')(moduleName);
-  require('./users')(moduleName);
-}
+// module.exports = function(moduleName) {
+  angular.module('mage.admin', [require('../factories'), require('../filters')])
+    .controller('AdminController', require('./admin.controller'));
+  require('./users');
+  require('./devices')('mage.admin');
+  require('./events')('mage.admin');
+  require('./layers')('mage.admin');
+  require('./settings')('mage.admin');
+  require('./teams')('mage.admin');
+  // require('./users')(moduleName);
+// }

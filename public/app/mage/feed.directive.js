@@ -7,9 +7,7 @@ require('../observation/form/form.directive');
 require('../observation/observation-feed.directive');
 require('../user/user-feed.directive');
 
-angular
-  .module('mage')
-  .directive('newsFeed', newsFeed);
+module.exports = newsFeed;
 
 function newsFeed() {
   var directive = {

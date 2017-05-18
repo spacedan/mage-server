@@ -21,7 +21,7 @@ function avatarUser() {
   return directive;
 }
 
-AvatarUserController.$inject = ['$scope', '$element', '$http', require('../factories/local-storage.service')];
+AvatarUserController.$inject = ['$scope', '$element', '$http', require('../factories/local-storage.service').name];
 
 function AvatarUserController($scope, $element, $http, LocalStorageService) {
   if (!$scope.avatarWidth) $scope.avatarWidth = 60;

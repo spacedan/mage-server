@@ -1,14 +1,12 @@
-var angular = require('angular')
-  , moment = require('moment')
+var moment = require('moment')
   , _ = require('underscore');
 
-module.exports = 'FilterService';
+module.exports = {
+  factory: FilterService,
+  name: 'FilterService'
+};
 
-angular
-  .module('mage')
-  .factory(module.exports, FilterService);
-
-FilterService.$inject = [require('./user.service')];
+FilterService.$inject = [require('./user.service').name];
 
 function FilterService(UserService) {
   var event = null;

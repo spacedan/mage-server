@@ -1,11 +1,10 @@
 var angular = require('angular')
   , $ = require('jquery');
 
-module.exports = 'DeviceService';
-
-angular
-  .module('mage')
-  .factory(module.exports, DeviceService);
+module.exports = {
+  factory: DeviceService,
+  name: 'DeviceService'
+};
 
 DeviceService.$inject = ['$http'];
 

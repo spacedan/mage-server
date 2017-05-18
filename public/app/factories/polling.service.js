@@ -1,11 +1,9 @@
-var angular = require('angular')
-  , _ = require('underscore');
+var _ = require('underscore');
 
-module.exports = 'PollingService';
-
-angular
-  .module('mage')
-  .service(module.exports, PollingService);
+module.exports = {
+  factory: PollingService,
+  name: 'PollingService'
+};
 
 function PollingService() {
   var listeners = [];

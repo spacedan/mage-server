@@ -1,14 +1,12 @@
-var angular = require('angular')
-  , _ = require('underscore')
+var _ = require('underscore')
   , moment = require('moment');
 
-module.exports = 'EventService';
+module.exports = {
+  factory: EventService,
+  name: 'EventService'
+};
 
-angular
-  .module('mage')
-  .service(module.exports, EventService);
-
-EventService.$inject = ['$rootScope', '$q', '$timeout', '$http', require('./event.resource'), require('./observation.service'), require('./location.service'), require('./layer.service'), require('./filter.service'), require('./polling.service'), require('./user.service')];
+EventService.$inject = ['$rootScope', '$q', '$timeout', '$http', require('./event.resource').name, require('./observation.service').name, require('./location.service').name, require('./layer.service').name, require('./filter.service').name, require('./polling.service').name, require('./user.service').name];
 
 function EventService($rootScope, $q, $timeout, $http, Event, ObservationService, LocationService, LayerService, FilterService, PollingService, UserService) {
   var observationsChangedListeners = [];

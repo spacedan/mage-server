@@ -1,6 +1,4 @@
-angular
-  .module('mage')
-  .filter('offset', offsetFilter);
+module.exports = offsetFilter;
 
 offsetFilter.$inject = [];
 

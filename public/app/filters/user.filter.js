@@ -1,6 +1,4 @@
-angular
-  .module('mage')
-  .filter('user', userFilter);
+module.exports = userFilter;
 
 userFilter.$inject = [];
 

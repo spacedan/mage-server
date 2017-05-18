@@ -1,7 +1,5 @@
 var _ = require('underscore')
-  , moment = require('moment')
-  , offsetFilter = require('../filters/paging-offset.filter')
-  , userFilter = require('../filters/user.filter');
+  , moment = require('moment');
 
 module.exports = AdminController;
 

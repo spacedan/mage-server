@@ -1,12 +1,10 @@
-var angular = require('angular');
 
-module.exports = 'LayerService';
+module.exports = {
+  factory: LayerService,
+  name: 'LayerService'
+};
 
-angular
-  .module('mage')
-  .factory(module.exports, LayerService);
-
-LayerService.$inject = ['$q', require('./layer.resource')];
+LayerService.$inject = ['$q', require('./layer.resource').name];
 
 function LayerService($q, Layer) {
   var service = {

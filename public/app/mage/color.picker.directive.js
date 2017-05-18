@@ -1,6 +1,5 @@
-angular
-  .module('mage')
-  .directive('colorPicker', colorPicker);
+
+module.exports = colorPicker;
 
 function colorPicker() {
   var directive = {

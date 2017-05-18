@@ -24,7 +24,8 @@
     "url": "https://github.com/ngageoint/mage-server/issues"
   },
   "scripts": {
-    "build": "browserify main.js -o dist/app-browserify.js -d"
+    "watchify": "watchify main.js -o dist/app-browserify.js -d -v",
+    "postinstall": "browserify main.js -o dist/app-browserify.js -d"
   },
   "dependencies": {
     "angular": "^1.5.3",
@@ -54,6 +55,7 @@
     "videogular-controls": "^1.4.4",
     "videogular-overlay-play": "^1.4.4",
     "videogular-themes-default": "^1.4.4",
+    "watchify": "^3.9.0",
     "webfontloader": "^1.6.6"
   }
 }

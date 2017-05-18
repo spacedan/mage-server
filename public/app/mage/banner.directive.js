@@ -1,8 +1,4 @@
-angular
-  .module('mage')
-  .directive('banner', banner);
-
-function banner() {
+module.exports = function banner() {
   var directive = {
     restrict: "A",
     scope: {
@@ -15,7 +11,7 @@ function banner() {
   return directive;
 }
 
-BannerController.$inject = ['$scope', '$element', 'Settings'];
+BannerController.$inject = ['$scope', '$element', require('../factories/settings.resource').name];
 
 function BannerController($scope, $element, Settings) {
   Settings.get({type: 'banner'}, function(banner) {

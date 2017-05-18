@@ -1,7 +1,7 @@
 
 module.exports = AdminUsersController;
 
-AdminUsersController.$inject = ['$scope', '$uibModal', '$filter', '$location', require('../../factories/local-storage.service'), require('../../factories/user.service')];
+AdminUsersController.$inject = ['$scope', '$uibModal', '$filter', '$location', 'LocalStorageService', 'UserService'];
 
 function AdminUsersController($scope, $uibModal, $filter, $location, LocalStorageService, UserService) {
   $scope.token = LocalStorageService.getToken();

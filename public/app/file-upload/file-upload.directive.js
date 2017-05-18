@@ -1,5 +1,7 @@
+module.exports = 'mage.fileUpload';
+
 angular
-  .module('mage')
+  .module('mage.fileUpload',[])
   .directive('fileUpload', fileUpload);
 
 function fileUpload() {
