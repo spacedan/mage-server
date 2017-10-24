@@ -80,12 +80,15 @@ function MapClipController($rootScope, $scope, $element, MapService) {
       attributionControl: false
     });
 
+    var marker;
     if ($scope.feature && $scope.feature.geometry) {
       var geojson = L.geoJson($scope.feature, {
         pointToLayer: function (feature, latlng) {
-          return L.fixedWidthMarker(latlng, {
+          marker = L.fixedWidthMarker(latlng, {
             iconUrl: feature.style.iconUrl
           });
+
+          return marker;
         }
       });
 
@@ -107,6 +110,12 @@ function MapClipController($rootScope, $scope, $element, MapService) {
         map.removeControl(worldExtentControl);
         controlsOn = false;
       }
+    });
+
+    $scope.$watch('feature.style.iconUrl', function(iconUrl) {
+      marker.setIcon(L.fixedWidthIcon({
+        iconUrl: iconUrl
+      }));
     });
   }
 }

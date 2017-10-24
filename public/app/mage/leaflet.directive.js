@@ -349,12 +349,9 @@ function LeafletController($rootScope, $scope, $interval, $timeout, MapService, 
       }
 
       // Set the icon
-      if (layer.feature && layer.feature.iconUrl !== feature.iconUrl) {
-        layer.setIcon(L.urlDivIcon({
-          feature: feature,
-          token: LocalStorageService.getToken()
-        }));
-      }
+      layer.setIcon(L.fixedWidthIcon({
+        iconUrl: feature.style.iconUrl
+      }));
 
       if (featureLayer.options.temporal) {
         var color = colorForFeature(feature, featureLayer.options.temporal);
