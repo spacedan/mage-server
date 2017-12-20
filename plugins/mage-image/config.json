@@ -6,7 +6,7 @@
     "interval": 60
   },
   "mongodb": {
-	  "url": "mongodb://localhost/magedb",
+	  "url": "mongodb://mongo:27017/magedb",
 	  "poolSize": 1
 	}
 }
