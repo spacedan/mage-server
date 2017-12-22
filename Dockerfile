@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-RUN apt-get update && apt-get install -y nodejs npm 
+RUN apt-get update && apt-get install -y nodejs npm graphicsmagick
 
 RUN mkdir /opt/mage && mkdir /var/lib/mage 
 
