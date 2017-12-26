@@ -8,11 +8,21 @@ services:
     ports: 
     - "27017:27017"
   mage:
-    image: mage:latest
+    build: .
+    image: mage:0.0.1-beta
     links:
     - mongo
     ports:
     - "4242:4242"
-
+    depends_on:
+    - "migrator"
+  migrator:
+    image: mage:0.0.1-beta
+    links:
+    - mongo
+    command: npm run migrate
+    build: .
+    depends_on:
+    - "mongo"
 volumes:
   mongodata:
