@@ -1,15 +1,22 @@
-FROM ubuntu:16.04
+FROM node:alpine 
 
-RUN apt-get update && apt-get install -y nodejs npm graphicsmagick
+RUN apk update && apk add graphicsmagick git wget unzip
 
-RUN mkdir /opt/mage && mkdir /var/lib/mage 
+RUN mkdir /opt/mage \
+&& chown -R node:node /opt/mage \
+&& mkdir /var/lib/mage \
+&& chown node:node /var/lib/mage
 
-#RUN apt-get install -y wget unzip && wget https://codeload.github.com/ngageoint/mage-server/zip/master -O temp.zip; unzip temp.zip -d /opt/mage; rm temp.zip
-
-COPY ./ /opt/mage/
+USER node
 
 WORKDIR /opt/mage
 
-RUN npm install
+RUN mkdir /tmp/files \
+&& wget https://github.com/spacedan/mage-server/archive/master.zip \
+&& unzip master.zip \
+&& mv /opt/mage/mage-server-master/* /opt/mage/ \
+&& npm install && npm run build && /opt/mage/node_modules/bower/bin/bower install --config.cwd=public --config.interactive=false
 
-ENTRYPOINT ["nodejs", "app.js"]
+EXPOSE 4242
+
+CMD ["node", "app.js"]
