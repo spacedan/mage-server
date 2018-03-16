@@ -8,3 +8,5 @@ public/dist/*
 !public/dist/index.html
 
 coverage
+
+*.log
