@@ -1,11 +1,14 @@
-FROM node:alpine 
+FROM node:0.12.2
 
-RUN apk update && apk add graphicsmagick git wget unzip
+RUN apt update && apt upgrade -y && apt install -y graphicsmagick git wget unzip
 
-RUN mkdir /opt/mage \
-&& chown -R node:node /opt/mage \
+RUN useradd -d /home/node node \
+&& mkdir /home/node \
+&& chown -R node /home/node \
+&& mkdir /opt/mage \
+&& chown -R node /opt/mage \
 && mkdir /var/lib/mage \
-&& chown node:node /var/lib/mage
+&& chown node /var/lib/mage
 
 USER node
 
