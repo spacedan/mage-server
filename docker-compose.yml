@@ -9,19 +9,19 @@ services:
     - "27017:27017"
   mage:
     build: .
-    image: mage:0.0.1-beta
+    image: mage:latest
     links:
     - mongo
     ports:
     - "4242:4242"
     depends_on:
     - "migrator"
+    container_name: mage
   migrator:
-    image: mage:0.0.1-beta
+    image: mage:latest
     links:
     - mongo
     command: npm run migrate
-    build: .
     depends_on:
     - "mongo"
 volumes:
