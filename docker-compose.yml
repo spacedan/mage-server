@@ -7,6 +7,7 @@ services:
     - mongodata:/data/db
     ports: 
     - "27017:27017"
+    container_name: mongo
   mage:
     build: .
     image: mage:latest
@@ -24,5 +25,6 @@ services:
     command: npm run migrate
     depends_on:
     - "mongo"
+    container_name: migrator
 volumes:
   mongodata:
