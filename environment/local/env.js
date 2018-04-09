@@ -10,7 +10,7 @@ var mongoConfig = {
   // password: 'changeme',
   // ssl: true,
   scheme: 'mongodb',
-  host: "mongo",
+  host: "172.18.0.1",
   port: 27017,
   db: "magedb",
   poolSize: 5
