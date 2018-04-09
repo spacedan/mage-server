@@ -13,9 +13,9 @@ USER node
 WORKDIR /opt/mage
 
 RUN mkdir /tmp/files \
-&& wget https://github.com/ngageoint/mage-server/archive/5.1.0.zip \
-&& unzip 5.1.0.zip \
-&& mv /opt/mage/mage-server-5.1.0/* /opt/mage/ \
+&& wget https://github.com/spacedan/mage-server/archive/master.zip \
+&& unzip master.zip \
+&& mv /opt/mage/mage-server-master/* /opt/mage/ \
 && npm install && npm run build 
 
 EXPOSE 4242
